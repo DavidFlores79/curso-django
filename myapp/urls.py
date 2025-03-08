@@ -4,5 +4,5 @@ from . import views
 # Cada app tiene sus propias rutas
 urlpatterns = [
     path('', views.helloWord),
-    path('contact', views.about)
+    path('contact/<str:username>', views.about)
 ]

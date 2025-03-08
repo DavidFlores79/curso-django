@@ -6,7 +6,8 @@ def helloWord(request):
         <h1>hola mundo!!</h1>
     """)
     
-def about(request):
+def about(request, username):
+    print(username)
     return HttpResponse("""
-        <h1>Acerca de Nosotros</h1>
-    """)
+        <h1>Acerca de Nosotros %s</h1>
+    """ % username)
