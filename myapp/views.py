@@ -1,5 +1,6 @@
 from django.http import HttpResponse, JsonResponse
-from .models import Project
+from .models import Project, Task
+from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 def helloWord(request):
@@ -8,22 +9,24 @@ def helloWord(request):
     """)
     
 def index(request):
-    return HttpResponse("""
-        <h1>Home Page</h1>
-    """)
+    title = 'Django App'
+    return render(request, 'index.html', {
+        'title': title
+    })
     
-def about(request, username):
-    print(username)
-    return HttpResponse("""
-        <h1>Acerca de Nosotros %s</h1>
-    """ % username)
+def about(request):
+    return render(request, 'about.html')
     
 def projects(request):
-    projects = list(Project.objects.values())
-    return JsonResponse(projects, safe=False)
+    projects = list(Project.objects.all())
+    return render(request, 'projects.html', {
+        'projects': projects
+    })
     
 def tasks(request):
-    return HttpResponse("""
-        <h1>Tareas</h1>
-    """)
+    # task = get_object_or_404(Task, id=id)
+    tasks = list(Task.objects.all())
+    return render(request, 'tasks.html', {
+        'tasks': tasks
+    })
     
