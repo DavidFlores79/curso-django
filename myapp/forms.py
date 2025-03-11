@@ -18,3 +18,11 @@ class CreateNewTask(forms.Form):
         widget=forms.Select(attrs={'class':'form-control'}),
         label="Project"
     )
+    
+class CreateNewProject(forms.Form):
+    name = forms.CharField(
+        label="Name", 
+        widget=forms.TextInput(attrs={'class': 'form-control'}),
+        max_length=200,
+        required=True
+    )
