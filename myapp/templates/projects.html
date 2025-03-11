@@ -1,24 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django App - Proyectos</title>
-</head>
-<body>
+{% extends "layouts/main.html" %}
+
+{% block content %}
     <h1>Proyectos</h1>
-    <table>
-        <thead>
-            <tr><th>Nombre</th></tr>
-        </thead>
-        <tbody>
-            {% for project in projects %}
-            <tr>
-                <td>{{ project.name }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-</body>
-</html>
+    <div class="table-responsive">        
+        <table class="table">
+            <thead>
+                <tr><th>Nombre</th></tr>
+            </thead>
+            <tbody>
+                {% for project in projects %}
+                <tr>
+                    <td>{{ project.name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}

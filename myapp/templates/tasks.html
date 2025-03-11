@@ -1,35 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Django App - Tareas</title>
-    <style>
-        table {
-            border: 2px solid rgb(140 140 140);
-        }
-    </style>
-</head>
-<body>
+{% extends "layouts/main.html" %}
+
+{% block content %}
     <h1>Tareas</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Título</th>
-                <th>Description</th>
-                <th>Projecto</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-            <tr>
-                <td>{{ task.title }}</td>
-                <td>{{ task.description }}</td>
-                <td>{{ task.project.name }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    
-</body>
-</html>
+    <button class="btn btn-primary text-end">Crear</button>
+    <div class="my-4"></div>
+    <div class="table-responsive">        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Project</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.project.name }}</td>
+                    <td class="pointer">{% if task.done %} ✅ {% else %} ☑️ {% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
