@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from .models import Project, Task
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import CreateNewTask
 
 # Create your views here.
 def helloWord(request):
@@ -30,6 +31,21 @@ def tasks(request):
         'tasks': tasks
     })
 
-def create_tasks(request):
-    return render(request, 'create_tasks.html')
+def create_task(request):
+    
+    if request.method == 'POST':
+        form = CreateNewTask(request.POST)
+        if form.is_valid():
+            Task.objects.create(
+                title=request.POST['title'],
+                description=request.POST['description'],
+                project_id=request.POST['project']
+            )
+        return redirect('/tasks')
+    else:
+        projects = list(Project.objects.all())
+        return render(request, 'create_task.html', {
+            'form': CreateNewTask(),
+            'projects': projects
+        })
     

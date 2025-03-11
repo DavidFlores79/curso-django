@@ -2,5 +2,29 @@
 
 {% block content %}
     <h1>Create Task</h1>
-    
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group mb-2">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            {{ form.title }}
+        </div>
+        <div class="form-group mb-2">
+            <label for="{{ form.description.id_for_label }}">Description</label>
+            {{ form.description }}
+        </div>
+
+        <div class="form-group mb-2">
+            <label for="project">Project</label>
+            <select name="project" id="project" class="form-control">
+                {% for project in projects %}
+                    <option value="{{ project.id }}">{{ project.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group mb-2">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+    </form>
 {% endblock content %}
